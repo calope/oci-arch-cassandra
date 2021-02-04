@@ -51,7 +51,7 @@ variables:
     required: true
     title: "Cassandra nodes shape"
     description: "Choose Instance Shape for Cassandra nodes."
-    default: "VM.Standard2.1"
+    default: "BM.DenseIO2.52"
     dependsOn:
       compartmentId: ${compartment_ocid}
 
