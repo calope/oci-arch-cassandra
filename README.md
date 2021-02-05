@@ -1,8 +1,6 @@
 # oci-arch-cassandra
 
-Apache Cassandra is a distributed NoSQL database. It scales linearly and is highly available with no single point of failure because data is automatically replicated to multiple nodes. Cassandra supports data replication across multiple data centers.
-
-This reference architecture shows a typical six-node deployment of a Cassandra cluster on Oracle Cloud Infrastructure Compute instances.
+Apache Cassandra is an open-source NoSQL database. It scales linearly, and data is replicated automatically to multiple nodes. Run your Apache Cassandra clusters in Oracle Cloud Infrastructure, and take advantage of enterprise-grade reliability, security, and operational flexibility.
 
 For details of the architecture, see [_Deploy a highly available Apache Cassandra cluster_](https://docs.oracle.com/en/solutions/ha-cassandra-cluster/index.html)
 
