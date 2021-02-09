@@ -22,6 +22,7 @@ variableGroups:
 - title: Optional Configuration
   visible: true
   variables:
+  - cassandra_version
   - instance_os
   - linux_os_version
   - vcn_cidr
@@ -74,6 +75,16 @@ variables:
     default: 3
     title: "Number of seed nodes in Cassandra cluster"
     description: "Choose the number of seed nodes in Cassandra cluster."
+
+  cassandra_version:
+    type: enum
+    required: false
+    visible: true
+    title: "Cassandra version"
+    description: "Choose version of Cassandra."
+    default: "3.11.10"
+    enum:
+      - "3.11.10"  
 
   vcn_cidr:
     type: string
