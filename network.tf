@@ -6,6 +6,7 @@ resource "oci_core_virtual_network" "CassandraVCN" {
   compartment_id = var.compartment_ocid
   display_name   = "CassandraVCN"
   dns_label      = "ocicassandra"
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 ############################################
@@ -15,6 +16,7 @@ resource "oci_core_internet_gateway" "CassandraIG" {
   compartment_id = var.compartment_ocid
   display_name   = "${var.label_prefix}CassandraIG"
   vcn_id         = oci_core_virtual_network.CassandraVCN.id
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 ############################################
@@ -31,6 +33,7 @@ resource "oci_core_route_table" "CassandraRT" {
     # Internet Gateway route target for instances on public subnets
     network_entity_id = oci_core_internet_gateway.CassandraIG.id
   }
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 ############################################
@@ -72,7 +75,7 @@ resource "oci_core_security_list" "CassandraSL" {
       protocol = "6"
       source   = "0.0.0.0/0"
   }    
-  
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 ############################################
@@ -92,4 +95,5 @@ resource "oci_core_subnet" "CassandraSubnet" {
   vcn_id              = oci_core_virtual_network.CassandraVCN.id
   route_table_id      = oci_core_route_table.CassandraRT.id
   dhcp_options_id     = oci_core_virtual_network.CassandraVCN.default_dhcp_options_id
+  defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

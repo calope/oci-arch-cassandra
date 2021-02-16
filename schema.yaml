@@ -30,6 +30,7 @@ variableGroups:
   - label_prefix
   - storage_port
   - ssl_storage_port
+  - release
 
 variables:
 
@@ -148,6 +149,12 @@ variables:
     default: 7001
     title: "SSL Storage Port in Cassandra cluster"
     description: "Choose SSL Storage Port in Cassandra cluster."
+
+  release:
+    type: string
+    required: false
+    visible: false
+    title: "Reference Architecture Release (OCI Architecture Center)"
 
 outputs:
 

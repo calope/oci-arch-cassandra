@@ -16,4 +16,5 @@ module "cassandra" {
   ssh_authorized_keys  = tls_private_key.public_private_key_pair.public_key_openssh
   ssh_private_key      = tls_private_key.public_private_key_pair.private_key_pem
   cassandra_version    = var.cassandra_version
+  defined_tags         = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

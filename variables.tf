@@ -5,6 +5,11 @@ variable "private_key_path" {}
 variable "region" {}
 variable "compartment_ocid" {}
 
+variable "release" {
+  description = "Reference Architecture Release (OCI Architecture Center)"
+  default     = "1.0"
+}
+
 variable "instance_os" {
   description = "Operating system for compute instances"
   default     = "Oracle Linux"
