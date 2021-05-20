@@ -187,9 +187,9 @@ variables:
     visible: true
     title: "Instance OS version"
     description: "An Operating System version that determines the operating system version for Cassandra nodes."
-    default: "7.8"
+    default: "7.9"
     enum:
-      - "7.8"       
+      - "7.9"       
 
   label_prefix:
     type: string
