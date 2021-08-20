@@ -16,6 +16,7 @@ variableGroups:
   visible: true  
   variables:
   - compartment_ocid
+  - use_private_subnet
   - node_shape
   - node_flex_shape_ocpus
   - node_flex_shape_memory
@@ -29,7 +30,8 @@ variableGroups:
         - show_advanced
   variables:
   - vcn_cidr
-  - subnet_cidr
+  - cassandra_subnet_cidr
+  - bastion_subnet_cidr
   - label_prefix
 
 - title: Compute Optional Configuration
@@ -71,6 +73,13 @@ variables:
     visibile: true
     title: "Region"
     description: "Choose Region where your Cassandra cluster will be deployed."
+
+  use_private_subnet:
+    type: boolean
+    title: "Use Private Subnet?"
+    description: "Decide if you want to hide Cassandra in the private subnet with access via Bastion Service."
+    visible: true
+    default: true
 
   node_shape:
     type: oci:core:instanceshape:name
@@ -151,9 +160,9 @@ variables:
     visible: true
     title: "Cassandra version"
     description: "Choose version of Cassandra."
-    default: "3.11.10"
+    default: "3.11.11"
     enum:
-      - "3.11.10"  
+      - "3.11.11"  
 
   vcn_cidr:
     type: string
@@ -163,13 +172,23 @@ variables:
     title: "VCN CIDR"
     description: "Choose VCN CIDR for your Cassandra cluster deployment."
 
-  subnet_cidr:
+  cassandra_subnet_cidr:
     type: string
     visible: true
     required: false
     pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-    title: "Subnet CIDR"
-    description: "Choose Subnet CIDR for your Cassandra cluster deployment."
+    title: "Cassandra Subnet CIDR"
+    description: "Choose Public or Private Subnet CIDR for your Cassandra cluster deployment."
+
+  bastion_subnet_cidr:
+    type: string
+    visible: 
+      and:
+        - use_private_subnet
+    required: false
+    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
+    title: "Bastion Subnet CIDR"
+    description: "Choose Public Subnet CIDR for your Bastion deployment."
 
   instance_os:
     type: enum

@@ -1,4 +1,4 @@
-## Copyright © 2020, Oracle and/or its affiliates. 
+## Copyright © 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 variable "tenancy_ocid" {}
@@ -8,9 +8,14 @@ variable "private_key_path" {}
 variable "region" {}
 variable "compartment_ocid" {}
 
+variable "use_private_subnet" {
+  description = "Decide if you want to hide Cassandra in the private subnet with access via Bastion Service"
+  default     = false
+}
+
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.1"
+  default     = "1.2"
 }
 
 variable "instance_os" {
@@ -30,11 +35,11 @@ variable "node_shape" {
 }
 
 variable "node_flex_shape_ocpus" {
-   default = 1
+  default = 1
 }
 
 variable "node_flex_shape_memory" {
-   default = 10
+  default = 10
 }
 
 variable "label_prefix" {
@@ -45,8 +50,12 @@ variable "vcn_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "subnet_cidr" {
-  default = "10.0.0.0/24"
+variable "bastion_subnet_cidr" {
+  default = "10.0.1.0/24"
+}
+
+variable "cassandra_subnet_cidr" {
+  default = "10.0.2.0/24"
 }
 
 variable "node_count" {
@@ -67,5 +76,5 @@ variable "ssl_storage_port" {
 
 variable "cassandra_version" {
   description = "Version of Cassandra software"
-  default     = "3.11.10"
+  default     = "3.11.11"
 }
