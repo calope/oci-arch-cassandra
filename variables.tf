@@ -15,7 +15,7 @@ variable "use_private_subnet" {
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.2"
+  default     = "1.3"
 }
 
 variable "instance_os" {
@@ -48,10 +48,6 @@ variable "label_prefix" {
 
 variable "vcn_cidr" {
   default = "10.0.0.0/16"
-}
-
-variable "bastion_subnet_cidr" {
-  default = "10.0.1.0/24"
 }
 
 variable "cassandra_subnet_cidr" {

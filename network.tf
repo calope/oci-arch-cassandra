@@ -12,6 +12,7 @@ resource "oci_core_virtual_network" "CassandraVCN" {
   defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
+
 ############################################
 # Create Internet Gateway
 ############################################
@@ -22,6 +23,7 @@ resource "oci_core_internet_gateway" "CassandraIG" {
   defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
+
 ############################################
 # Create NAT Gateway
 ############################################
@@ -31,6 +33,7 @@ resource "oci_core_nat_gateway" "CassandraNATGW" {
   vcn_id         = oci_core_virtual_network.CassandraVCN.id
   defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
+
 
 ############################################
 # Create Route Table for Public Network
@@ -47,6 +50,7 @@ resource "oci_core_route_table" "CassandraPublicRT" {
   }
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
+
 
 ############################################
 # Create Route Table for Private Network
@@ -106,21 +110,6 @@ resource "oci_core_security_list" "CassandraSL" {
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
-############################################
-# Create Subnets
-############################################
-resource "oci_core_subnet" "BastionSubnet" {
-  count             = var.use_private_subnet ? 1 : 0
-  cidr_block        = var.bastion_subnet_cidr
-  display_name      = "${var.label_prefix}BastionSubnet"
-  dns_label         = "bastion"
-  security_list_ids = [oci_core_virtual_network.CassandraVCN.default_security_list_id, oci_core_security_list.CassandraSL.id]
-  compartment_id    = var.compartment_ocid
-  vcn_id            = oci_core_virtual_network.CassandraVCN.id
-  route_table_id    = oci_core_route_table.CassandraPublicRT.id
-  dhcp_options_id   = oci_core_virtual_network.CassandraVCN.default_dhcp_options_id
-  defined_tags      = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
-}
 
 resource "oci_core_subnet" "CassandraSubnet" {
   cidr_block                 = var.cassandra_subnet_cidr

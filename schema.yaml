@@ -31,7 +31,6 @@ variableGroups:
   variables:
   - vcn_cidr
   - cassandra_subnet_cidr
-  - bastion_subnet_cidr
   - label_prefix
 
 - title: Compute Optional Configuration
@@ -179,16 +178,6 @@ variables:
     pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
     title: "Cassandra Subnet CIDR"
     description: "Choose Public or Private Subnet CIDR for your Cassandra cluster deployment."
-
-  bastion_subnet_cidr:
-    type: string
-    visible: 
-      and:
-        - use_private_subnet
-    required: false
-    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
-    title: "Bastion Subnet CIDR"
-    description: "Choose Public Subnet CIDR for your Bastion deployment."
 
   instance_os:
     type: enum
