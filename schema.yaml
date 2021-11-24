@@ -146,7 +146,7 @@ variables:
   seeds_count:
     type: number
     required: false
-    minimum: 3
+    minimum: 1        # elegir nosotros la semilla
     maximum: 1000
     multipleOf: 1
     default: 3

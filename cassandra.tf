@@ -2,7 +2,7 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 module "cassandra" {
-  source                 = "github.com/oracle-quickstart/oci-cassandra"
+  source                 = "github.com/calope/oci-cassandra"
   compartment_ocid       = var.compartment_ocid
   node_count             = var.node_count
   seeds_count            = var.seeds_count
